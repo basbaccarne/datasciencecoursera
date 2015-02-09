@@ -1,2 +1,2 @@
-# datasciencecoursera
-Repo for the Datascience course on Coursera
+# This is the repo "datasciencecoursera"
+A repo for the Datascience course on Coursera
