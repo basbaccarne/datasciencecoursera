@@ -35,7 +35,7 @@ library(knitr)
 library(car)
 ```
 
-#### Adding weight to to equation
+### Adding weight to to equation
 
 The difference in fuel efficiency might also be related to other characteristics of the vehicle. Therefore, we dig a little bit deeper into more complex models to check if this relationship still holds if we include more predictors.
 
@@ -51,7 +51,7 @@ A correlation matrix shows that the highest correlaton between fuel efficiency (
 lm <- lm(mpg ~ wt + factor(am), data = mtcars)
 ```
 
-#### Transmission as an interaction factor
+### Transmission as an interaction factor
 
 However! Heavier vehicles tend to have an automatic transmission and lighter vehicles tend to have a manual transmission, with only little overlap between two groups. Figure 2 (appendix) shows this, and also reveils a possible interaction effect of transmission type on the relationship between mpg and wt. More speficically, the effect of car weight on fuel efficiency looks stronger for cars with a manual transmission than for cars with an automatic transmission. Therefore, it seems plausible to add transmission type as an interaction factor, rather than as an independent predictor to our model (**mpg ~ wt * am**). 
 
@@ -65,7 +65,7 @@ summary(lm1)
 
 In this model, transmission type is a significant interaction parameter (see table 3 in the appendix). The decrease in miles with a single gallon of fuel is 3.79 miles per 1000 lbs for automatic transmission systems and 9.08 miles per 1000 lbs for manual transmission systems. This model explains 83.3% of the variation in fuel efficiency (R² = 0.833; F(3,28) = 46.57; p = 5.21e-11), which is already quite good.
 
-#### Exploring more elaborate models
+### Exploring more elaborate models
 
 ```{r full model, include=FALSE}
 coef(summary(lm(mpg ~ ., data = mtcars)))
@@ -106,7 +106,7 @@ table[is.na(table)] <- ""
 kable(table,caption="ANOVA results")
 ```
 
-#### Final model
+### Final model
 
 The outcomes show that acceleration (qsec) is a significant addition to our model, but adding horsepower and engine displacement does not significantly improve our model. Model 3, our final model, explains 89.6% of the variation in fuel efficiency (R² = 0.90; F(4,27) = 58.06; p = 7.17e-13). The coefficients table can be found in the appendix (table 3). These estimates can be interpreted as an increase or decrease fuel efficiency (in mpg) for one unit increase of the respective predictor, when keeping the other predictors equal.
 
@@ -116,17 +116,17 @@ summary(lm2)
 
 > **final model: mpg ~ wt * am + qsec**
 
-#### Evaluation of this model
+### Evaluation of this model
 The residual plots in figure 3 (appendix) show no structured patterns. There is no heteroscidiscity and the residuals are normally distributed (*Shapiro-Wilk normality test on the residuals: W = 0.94; p = 0.10*). Based on these evaluation criteria, the model shows no problematic aspecs.
 
 When looking at the variance inflation factors (VIF) expressed as standard errors (sqrt(VIF)) in table 4, we notice that weight (sqrt(VIF) = 1.74) and acceleration (sqrt(VIF) = 1.20) are rather uncorrelated with the other predictors. Transmission has a higher intercorrelation (sqrt(VIF)am = 4.58 ; sqrt(VIF)wt:am = 4.04)), which is something we also saw visually in figure 2.
 
-#### Conclusion
+### Conclusion
 So is an automatic or manual transmission better for mpg? No, weight is the most important predictor. Transmission type changes the relationship between weight and mpg, and finally, accelation is the third significant predictor for mpg.
 
-Here you can find the original rmd file with all the code to generate this document.
+[Here](https://github.com/basbaccarne/datasciencecoursera/blob/master/regression_models_course_project.rmd) you can find the original rmd file with all the code to generate this document.
 
-## Appendix
+### Appendix
 \begin{center}
 Figure 1. Manual transmission cars seem to have a better fuel efficiency
 \end{center}
